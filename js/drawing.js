@@ -1,20 +1,21 @@
 document.addEventListener('DOMContentLoaded', function() {
     const canvas = document.getElementById('drawingCanvas');
     const ctx = canvas.getContext('2d');
+    const saveButton = document.getElementById('saveDrawing');
 
-    canvas.width = 800; // Match the width set in CSS
-    canvas.height = 600; // Match the height set in CSS
+    canvas.width = 800;
+    canvas.height = 600;
 
     let drawing = false;
 
     function startDrawing(e) {
         drawing = true;
-        draw(e); // This helps to draw points when clicking without moving the mouse
+        draw(e);
     }
 
     function endDrawing() {
         drawing = false;
-        ctx.beginPath(); // Begin a new path to stop drawing when moving to a new position
+        ctx.beginPath();
     }
 
     function draw(e) {
@@ -30,6 +31,15 @@ document.addEventListener('DOMContentLoaded', function() {
         ctx.moveTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
     }
 
+    function saveDrawing() {
+        const dataURL = canvas.toDataURL();
+        let drawings = JSON.parse(localStorage.getItem('drawings')) || [];
+        drawings.push(dataURL);
+        localStorage.setItem('drawings', JSON.stringify(drawings));
+        alert('Drawing saved!');
+    }
+
+    saveButton.addEventListener('click', saveDrawing);
     canvas.addEventListener('mousedown', startDrawing);
     canvas.addEventListener('mouseup', endDrawing);
     canvas.addEventListener('mousemove', draw);
