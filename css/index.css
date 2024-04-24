@@ -7,7 +7,7 @@ body, html {
 
 #landing {
   height: 100vh;
-  background-color: #000000;
+  background: linear-gradient(to bottom, #000000 70%, #333333 100%); /* Gradient fade effect */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,7 +17,7 @@ body, html {
 #landing h1 {
   font-size: 10em;
   font-weight: bold;
-  color: #343a40;
+  color: #343a40; /* Adjusted for better visibility against the gradient */
   text-shadow:
     1px 1px 0 #999,
     2px 2px 0 #888,
@@ -37,7 +37,7 @@ body, html {
 }
 
 #about {
-  background-color: lightgrey;
+  background: linear-gradient(to top, #333333 0%, lightgrey 30%); /* Gradient fade from dark to light grey */
 }
 
 #talent {
