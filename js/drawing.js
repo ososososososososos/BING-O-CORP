@@ -1,46 +1,43 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const canvas = document.getElementById('drawingCanvas');
-    const ctx = canvas.getContext('2d');
-    const saveButton = document.getElementById('saveDrawing');
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+let isDrawing = false;
 
-    canvas.width = 800;
-    canvas.height = 600;
+canvas.addEventListener('mousedown', startDrawing);
+canvas.addEventListener('mousemove', draw);
+canvas.addEventListener('mouseup', endDrawing);
+canvas.addEventListener('mouseout', endDrawing);
 
-    let drawing = false;
+function startDrawing(event) {
+    isDrawing = true;
+    draw(event);
+}
 
-    function startDrawing(e) {
-        drawing = true;
-        draw(e);
-    }
+function draw(event) {
+    if (!isDrawing) return;
+    const x = event.offsetX;
+    const y = event.offsetY;
+    ctx.lineWidth = 2;
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = 'black';
+    ctx.lineTo(x, y);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+}
 
-    function endDrawing() {
-        drawing = false;
-        ctx.beginPath();
-    }
+function endDrawing() {
+    isDrawing = false;
+    ctx.closePath();
+}
 
-    function draw(e) {
-        if (!drawing) return;
-        
-        ctx.lineWidth = 5;
-        ctx.lineCap = 'round';
-        ctx.strokeStyle = '#000000';
+function clearCanvas() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
 
-        ctx.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.moveTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
-    }
-
-    function saveDrawing() {
-        const dataURL = canvas.toDataURL();
-        let drawings = JSON.parse(localStorage.getItem('drawings')) || [];
-        drawings.push(dataURL);
-        localStorage.setItem('drawings', JSON.stringify(drawings));
-        alert('Drawing saved!');
-    }
-
-    saveButton.addEventListener('click', saveDrawing);
-    canvas.addEventListener('mousedown', startDrawing);
-    canvas.addEventListener('mouseup', endDrawing);
-    canvas.addEventListener('mousemove', draw);
-});
+function saveDrawing() {
+    const dataURL = canvas.toDataURL();
+    let drawings = JSON.parse(localStorage.getItem('drawings')) || [];
+    drawings.push(dataURL);
+    localStorage.setItem('drawings', JSON.stringify(drawings));
+    window.location.href = '/trout/pages/gallery.html'; // Redirect to the gallery page
+}
