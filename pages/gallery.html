@@ -4,13 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gallery</title>
-    <link rel="stylesheet" href="../css/drawing.css">
+    <style>
+        /* Add CSS styles for the gallery */
+        .gallery-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+        .drawing {
+            margin: 10px;
+            border: 1px solid #ccc;
+        }
+        .drawing img {
+            max-width: 200px;
+            max-height: 200px;
+        }
+    </style>
 </head>
 <body>
-    <div class="gallery-container">
-        <h1>Gallery of Drawings</h1>
-        <div id="gallery"></div>
+    <div class="gallery-container" id="gallery-container">
+        <!-- Gallery drawings will be dynamically added here -->
     </div>
-    <script src="../js/gallery.js"></script>
+
+    <script>
+        // Retrieve saved drawings from local storage
+        const drawings = JSON.parse(localStorage.getItem('drawings')) || [];
+
+        // Display saved drawings in the gallery
+        const galleryContainer = document.getElementById('gallery-container');
+        drawings.forEach((drawingDataURL, index) => {
+            const drawingDiv = document.createElement('div');
+            drawingDiv.classList.add('drawing');
+            const drawingImg = document.createElement('img');
+            drawingImg.src = drawingDataURL;
+            drawingImg.alt = `Drawing ${index + 1}`;
+            drawingDiv.appendChild(drawingImg);
+            galleryContainer.appendChild(drawingDiv);
+        });
+    </script>
 </body>
 </html>
