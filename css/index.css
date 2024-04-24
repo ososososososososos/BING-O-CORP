@@ -7,7 +7,7 @@ body, html {
 
 #landing {
   height: 100vh;
-  background: linear-gradient(to bottom, #000000 95%, #333333 100%); /* Gradient fade effect */
+  background: linear-gradient(to bottom, #000000 95%, #343a40 100%); /* Gradient fade effect */
   display: flex;
   justify-content: center;
   align-items: center;
