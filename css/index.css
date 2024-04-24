@@ -17,8 +17,8 @@ body, html {
 #landing h1 {
   font-size: 10em;
   font-weight: bold;
-  color: #8d99ae;
-  text-shadow: 4px 2px #8d99ae;
+  color: #6c757d;
+  text-shadow: 4px 4px white;
 }
 
 #about, #talent {
