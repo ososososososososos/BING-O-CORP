@@ -3,10 +3,11 @@ body, html {
   margin: 0;
   padding: 0;
   scroll-behavior: smooth;
+  font-family: Arial, sans-serif;
 }
 
 #landing {
-  height: 100vh; /* 100% of the viewport height */
+  height: 100vh;
   background-color: grey;
   display: flex;
   justify-content: center;
@@ -15,23 +16,65 @@ body, html {
 }
 
 #landing h1 {
-  font-size: 5em; /* Big font size */
+  font-size: 5em;
   font-weight: bold;
   color: white;
   text-shadow: 2px 2px black;
 }
 
 #about, #talent {
-  height: 100vh; /* 100% of the viewport height */
-  background-color: lightgrey;
+  height: 100vh;
   padding: 50px;
   box-sizing: border-box;
 }
 
 #about {
-  /* Additional styling for about section */
+  background-color: lightgrey;
 }
 
 #talent {
-  /* Additional styling for talent section */
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.pyramid {
+  text-align: center;
+}
+
+.tier {
+  display: flex;
+  justify-content: center;
+}
+
+.top .content, .bottom .content {
+  margin: 15px;
+}
+
+.content img {
+  width: 100px;
+  height: auto;
+  border-radius: 50%;
+  margin-bottom: 8px;
+}
+
+.bottom {
+  margin-top: -30px;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.bottom .content {
+  flex-basis: 45%;
+}
+
+@media (max-width: 600px) {
+  .tier.bottom {
+    flex-direction: column;
+  }
+  .bottom .content {
+    flex-basis: 100%;
+  }
 }
