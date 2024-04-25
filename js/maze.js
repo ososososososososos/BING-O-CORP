@@ -98,4 +98,9 @@ function drawMaze(grid) {
             if (cell.walls.top) ctx.strokeRect(x1, y1, cellSize, 1);
             if (cell.walls.right) ctx.strokeRect(x1 + cellSize, y1, 1, cellSize);
             if (cell.walls.bottom) ctx.strokeRect(x1, y1 + cellSize, cellSize, 1);
-            if (cell.w
+            if (cell.walls.left) ctx.strokeRect(x1, y1, 1, cellSize);
+        }
+    }
+}
+
+drawMaze(grid);
