@@ -1,4 +1,4 @@
-const canvas = document.getElementById('canvas');
+const canvas = document.getElementById('drawingCanvas'); // Corrected ID
 const ctx = canvas.getContext('2d');
 let isDrawing = false;
 
@@ -27,11 +27,7 @@ function draw(event) {
 
 function endDrawing() {
     isDrawing = false;
-    ctx.closePath();
-}
-
-function clearCanvas() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.beginPath(); // Added to fix issue where stroke would continue drawing after mouse release
 }
 
 function saveDrawing() {
@@ -39,5 +35,5 @@ function saveDrawing() {
     let drawings = JSON.parse(localStorage.getItem('drawings')) || [];
     drawings.push(dataURL);
     localStorage.setItem('drawings', JSON.stringify(drawings));
-    window.location.href = '/trout/pages/gallery.html'; // Redirect to the gallery page
+    window.location.href = '/trout/pages/gallery.html'; // Correct path if needed
 }
