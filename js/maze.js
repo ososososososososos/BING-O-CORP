@@ -104,3 +104,29 @@ function drawMaze(grid) {
 }
 
 drawMaze(grid);
+
+// ... (rest of the code)
+
+// Use this to log the grid to the console for debugging
+function logGrid(grid) {
+    grid.forEach(row => {
+        let rowStr = row.map(cell => cell.visited ? ' ' : 'X').join('');
+        console.log(rowStr);
+    });
+}
+
+// Call this at the end of generateMaze to print the grid
+logGrid(grid);
+
+// ... (rest of the maze generation code)
+
+// After the maze is generated, but before it is drawn
+console.log('Maze generated: ');
+logGrid(grid);
+
+// Draw the maze and call this after to check rendering
+drawMaze(grid);
+console.log('Maze drawn.');
+
+// ... (rest of the drawing code)
+
