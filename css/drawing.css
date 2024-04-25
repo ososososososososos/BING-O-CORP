@@ -1,37 +1,61 @@
+/* Main body and HTML styling to ensure full height and centered content */
 body, html {
     height: 100%;
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: center;
+    flex-direction: column; /* Aligns the header and footer properly */
     align-items: center;
     background-color: #f0f0f0;
 }
 
+/* Header styling for a black background with white text, centered */
+.header-background {
+    width: 100%;
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 20px 0; /* Add padding for aesthetic spacing */
+}
+
+/* Container for the drawing area, centered with a border */
 .drawing-container {
     border: 2px solid #000;
     padding: 10px;
     background-color: #fff;
+    margin: auto; /* Centers the drawing container vertically and horizontally */
 }
 
+/* Canvas styling for drawing */
 #drawingCanvas {
     cursor: crosshair;
     display: block; /* Prevents margin issues */
     background-color: #ffffff;
 }
 
+/* Footer styling with centered and spaced links */
+.footer-background {
+    width: 100%;
+    background-color: #f0f0f0; /* Match the body background or as per your design */
+    padding: 20px 0; /* Add padding for aesthetic spacing */
+}
+
+/* Navigation list styling in the footer */
 .footer-background nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
     justify-content: center; /* Center footer links */
+    width: 100%; /* Ensure full width */
 }
 
+/* Individual list items in the footer */
 .footer-background nav li {
-    margin: 0 10px; /* Space between footer items */
+    margin: 0 20px; /* Increase space between footer items */
 }
 
+/* Link styling in the footer */
 .footer-background nav a {
     text-decoration: none;
     color: black; /* Adjust color for visibility */
