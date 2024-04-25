@@ -15,41 +15,24 @@ body, html {
 }
 
 #drawingCanvas {
-    width: 800px;
-    height: 600px;
     cursor: crosshair;
     display: block; /* Prevents margin issues */
     background-color: #ffffff;
 }
-.top-nav {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: transparent;
-    width: 100%;
-    padding: 10px 20px;
-    box-sizing: border-box;
-}
 
-.top-nav ul {
+.footer-background nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
-    align-items: center;
+    justify-content: center; /* Center footer links */
 }
 
-.top-nav li {
-    margin-right: 20px; /* Space between menu items */
+.footer-background nav li {
+    margin: 0 10px; /* Space between footer items */
 }
 
-.top-nav a {
+.footer-background nav a {
     text-decoration: none;
-    color: white; /* Adjust color as needed */
-    font-size: 16px; /* Adjust font size as needed */
-    text-transform: uppercase; /* Optional styling */
-}
-
-.top-nav a:hover {
-    color: #CCCCCC; /* Color change on hover */
+    color: black; /* Adjust color for visibility */
 }
