@@ -122,8 +122,6 @@ body, html {
 
 .modal-content {
   color: black;
-}
-
 .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
@@ -133,23 +131,22 @@ body, html {
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
 .modal-content {
-  background-color: #fefefe;
-  margin: auto; /* Auto margin for centering the modal */
-  padding: 20px;
-  border: 1px solid #888;
-  width: 60%; /* You can adjust this value */
-  /* Center the modal content vertically and horizontally */
-  position: relative;
+  position: absolute; /* Position absolutely within the .modal */
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); /* Center the modal content */
+  background-color: #fefefe;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%; /* Adjust width as needed */
+  /* Add max-width and margin 0 auto for better responsiveness */
+  max-width: 600px;
+  margin: 0 auto;
 }
-
 
 .close {
   color: #aaa;
