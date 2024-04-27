@@ -120,13 +120,17 @@ body, html {
     color: #CCCCCC; /* Color change on hover */
 }
 
+.modal-content {
+  color: black;
+}
+
 .modal {
   display: none;
   position: fixed;
   z-index: 1;
   left: 0;
   top: 0;
-  width: 100%;
+  width: 120%;
   height: 100%;
   overflow: auto;
   background-color: rgb(0,0,0);
@@ -171,3 +175,4 @@ body, html {
 #acknowledge:hover {
   background-color: #45a049;
 }
+
