@@ -133,24 +133,28 @@ body, html {
 }
 
 .modal-content {
-  background-color: #fefefe; /* White background for the content */
-  color: black; /* Ensures text inside is black */
+  background-color: #fefefe;
+  color: black;
   padding: 20px;
   border: 1px solid #888;
-  width: 60%; /* Adjust width as needed */
-  max-width: 600px; /* Maximum width of the modal */
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); /* Some shadow for a 'pop out' effect */
-
-  /* Centering the modal content */
-  position: fixed; /* Fixed position to stay in place */
-  top: 50%; /* Align top edge to middle of the screen */
-  left: 50%; /* Align left edge to middle of the screen */
-  transform: translate(-50%, -50%); /* Move back by half the width and height */
+  width: 120%; /* Increase the width if necessary */
+  max-width: 800px; /* Set a maximum width */
+  min-height: 300px; /* Set a minimum height */
+  overflow-y: auto; /* Enable vertical scrolling */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000; /* Ensure it's on top of other content */
 }
 
+/* Make sure that the close button is visible and not cut off */
 .close {
   color: #aaa;
-  float: right;
+  position: absolute; /* Position absolutely within the modal content */
+  top: 10px; /* Set top position */
+  right: 20px; /* Set right position */
   font-size: 28px;
   font-weight: bold;
   cursor: pointer;
