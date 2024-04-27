@@ -122,30 +122,34 @@ body, html {
 
 .modal-content {
   color: black;
+  
+/* This is for the modal overlay which covers the entire viewport */
 .modal {
   display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  position: fixed; /* Stay in place even on scroll */
+  z-index: 1; /* Sit on top of other content */
   left: 0;
   top: 0;
   width: 100%; /* Full width */
   height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  overflow: auto; /* Manage overflow */
+  background-color: rgba(0,0,0,0.4); /* Black with opacity for the overlay */
 }
 
+/* This is for the box that will contain the ASCII art and the buttons */
 .modal-content {
-  position: absolute; /* Position absolutely within the .modal */
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); /* Center the modal content */
-  background-color: #fefefe;
+  background-color: #fefefe; /* White background for the content */
+  margin: 15% auto; /* 15% top margin for some spacing from the top */
   padding: 20px;
   border: 1px solid #888;
-  width: 50%; /* Adjust width as needed */
-  /* Add max-width and margin 0 auto for better responsiveness */
-  max-width: 600px;
-  margin: 0 auto;
+  width: 50%; /* Width can be adjusted as needed */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); /* Some shadow for a "pop out" effect */
+  
+  /* This positions your modal-content in the center */
+  position: fixed; /* Stay in place even on scroll */
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Offset the content by half its width and height */
 }
 
 .close {
