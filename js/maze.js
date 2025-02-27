@@ -22,57 +22,58 @@ function createGrid(width, height) {
     return grid;
 }
 
-// The Recursive Backtracker algorithm
-function generateMaze(grid, startX = 0, startY = 0) {
+// Recursive Backtracking Maze Generation
+function generateMaze(grid, x = 0, y = 0) {
     let stack = [];
-    let current = grid[startY][startX];
+    let current = grid[y][x];
     current.visited = true;
-    stack.push(current);
 
-    const getNeighbors = (cell) => {
-        let neighbors = [];
-        let { x, y } = cell;
+    const directions = [
+        { x: 0, y: -1, wall: "top", opposite: "bottom" },
+        { x: 1, y: 0, wall: "right", opposite: "left" },
+        { x: 0, y: 1, wall: "bottom", opposite: "top" },
+        { x: -1, y: 0, wall: "left", opposite: "right" }
+    ];
 
-        // Possible neighbor positions (top, right, bottom, left)
-        const directions = [
-            { dx: 0, dy: -1, wallA: "top", wallB: "bottom" },
-            { dx: 1, dy: 0, wallA: "right", wallB: "left" },
-            { dx: 0, dy: 1, wallA: "bottom", wallB: "top" },
-            { dx: -1, dy: 0, wallA: "left", wallB: "right" }
-        ];
+    function getNeighbors(cell) {
+        return directions
+            .map(d => {
+                let nx = cell.x + d.x;
+                let ny = cell.y + d.y;
+                if (nx >= 0 && nx < gridWidth && ny >= 0 && ny < gridHeight && !grid[ny][nx].visited) {
+                    return { cell: grid[ny][nx], direction: d };
+                }
+                return null;
+            })
+            .filter(n => n !== null);
+    }
 
-        for (let dir of directions) {
-            let nx = x + dir.dx;
-            let ny = y + dir.dy;
-            if (nx >= 0 && nx < gridWidth && ny >= 0 && ny < gridHeight && !grid[ny][nx].visited) {
-                neighbors.push({ cell: grid[ny][nx], direction: dir });
-            }
-        }
-        return neighbors;
-    };
+    function removeWall(a, b, dir) {
+        a.walls[dir.wall] = false;
+        b.walls[dir.opposite] = false;
+    }
 
-    while (stack.length > 0) {
+    do {
         let neighbors = getNeighbors(current);
         if (neighbors.length > 0) {
             let { cell: next, direction } = neighbors[Math.floor(Math.random() * neighbors.length)];
-            current.walls[direction.wallA] = false;
-            next.walls[direction.wallB] = false;
             next.visited = true;
-            stack.push(next);
+            stack.push(current);
+            removeWall(current, next, direction);
             current = next;
-        } else {
+        } else if (stack.length > 0) {
             current = stack.pop();
         }
-    }
+    } while (stack.length > 0);
 }
 
 const grid = createGrid(gridWidth, gridHeight);
 generateMaze(grid);
 
-// Draw the maze on the canvas
+// Draw the maze
 function drawMaze(grid) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.strokeStyle = "black";
+    ctx.strokeStyle = 'black';
     ctx.lineWidth = 2;
 
     for (let y = 0; y < gridHeight; y++) {
@@ -82,12 +83,41 @@ function drawMaze(grid) {
             const y1 = y * cellSize;
 
             // Draw walls
-            if (cell.walls.top) ctx.strokeRect(x1, y1, cellSize, 1);
-            if (cell.walls.right) ctx.strokeRect(x1 + cellSize, y1, 1, cellSize);
-            if (cell.walls.bottom) ctx.strokeRect(x1, y1 + cellSize, cellSize, 1);
-            if (cell.walls.left) ctx.strokeRect(x1, y1, 1, cellSize);
+            if (cell.walls.top) {
+                ctx.beginPath();
+                ctx.moveTo(x1, y1);
+                ctx.lineTo(x1 + cellSize, y1);
+                ctx.stroke();
+            }
+            if (cell.walls.right) {
+                ctx.beginPath();
+                ctx.moveTo(x1 + cellSize, y1);
+                ctx.lineTo(x1 + cellSize, y1 + cellSize);
+                ctx.stroke();
+            }
+            if (cell.walls.bottom) {
+                ctx.beginPath();
+                ctx.moveTo(x1, y1 + cellSize);
+                ctx.lineTo(x1 + cellSize, y1 + cellSize);
+                ctx.stroke();
+            }
+            if (cell.walls.left) {
+                ctx.beginPath();
+                ctx.moveTo(x1, y1);
+                ctx.lineTo(x1, y1 + cellSize);
+                ctx.stroke();
+            }
         }
     }
+
+    // Draw start position (Top-left corner)
+    ctx.fillStyle = "green";
+    ctx.font = "bold 18px Arial";
+    ctx.fillText("START", 10, 20);
+
+    // Draw end position (Bottom-right corner)
+    ctx.fillStyle = "red";
+    ctx.fillText("END", canvas.width - 50, canvas.height - 10);
 }
 
 drawMaze(grid);
