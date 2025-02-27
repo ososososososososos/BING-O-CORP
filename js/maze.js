@@ -1,8 +1,8 @@
 const canvas = document.getElementById('mazeCanvas');
 const ctx = canvas.getContext('2d');
 const cellSize = 40;
-const gridWidth = canvas.width / cellSize;
-const gridHeight = canvas.height / cellSize;
+const gridWidth = Math.floor(canvas.width / cellSize);
+const gridHeight = Math.floor(canvas.height / cellSize);
 
 // Create a grid representation
 function createGrid(width, height) {
@@ -13,12 +13,7 @@ function createGrid(width, height) {
             row.push({
                 x: x,
                 y: y,
-                walls: {
-                    top: true,
-                    right: true,
-                    bottom: true,
-                    left: true
-                },
+                walls: { top: true, right: true, bottom: true, left: true },
                 visited: false
             });
         }
@@ -28,73 +23,65 @@ function createGrid(width, height) {
 }
 
 // The Recursive Backtracker algorithm
-function generateMaze(grid, x = 0, y = 0) {
+function generateMaze(grid, startX = 0, startY = 0) {
     let stack = [];
-    let current = grid[y][x];
+    let current = grid[startY][startX];
     current.visited = true;
+    stack.push(current);
 
-    const checkNeighbors = () => {
+    const getNeighbors = (cell) => {
         let neighbors = [];
-        
-        // Get valid neighbors
-        if (x > 0 && !grid[y][x - 1].visited) neighbors.push(grid[y][x - 1]);
-        if (y > 0 && !grid[y - 1][x].visited) neighbors.push(grid[y - 1][x]);
-        if (x < gridWidth - 1 && !grid[y][x + 1].visited) neighbors.push(grid[y][x + 1]);
-        if (y < gridHeight - 1 && !grid[y + 1][x].visited) neighbors.push(grid[y + 1][x]);
+        let { x, y } = cell;
 
+        // Possible neighbor positions (top, right, bottom, left)
+        const directions = [
+            { dx: 0, dy: -1, wallA: "top", wallB: "bottom" },
+            { dx: 1, dy: 0, wallA: "right", wallB: "left" },
+            { dx: 0, dy: 1, wallA: "bottom", wallB: "top" },
+            { dx: -1, dy: 0, wallA: "left", wallB: "right" }
+        ];
+
+        for (let dir of directions) {
+            let nx = x + dir.dx;
+            let ny = y + dir.dy;
+            if (nx >= 0 && nx < gridWidth && ny >= 0 && ny < gridHeight && !grid[ny][nx].visited) {
+                neighbors.push({ cell: grid[ny][nx], direction: dir });
+            }
+        }
+        return neighbors;
+    };
+
+    while (stack.length > 0) {
+        let neighbors = getNeighbors(current);
         if (neighbors.length > 0) {
-            let next = neighbors[Math.floor(Math.random() * neighbors.length)];
-            return next;
-        } else {
-            return undefined;
-        }
-    };
-
-    const removeWall = (a, b) => {
-        if (a.x === b.x) {
-            if (a.y > b.y) {
-                a.walls.top = false;
-                b.walls.bottom = false;
-            } else {
-                a.walls.bottom = false;
-                b.walls.top = false;
-            }
-        } else {
-            if (a.x > b.x) {
-                a.walls.left = false;
-                b.walls.right = false;
-            } else {
-                a.walls.right = false;
-                b.walls.left = false;
-            }
-        }
-    };
-
-    do {
-        let next = checkNeighbors();
-        if (next) {
+            let { cell: next, direction } = neighbors[Math.floor(Math.random() * neighbors.length)];
+            current.walls[direction.wallA] = false;
+            next.walls[direction.wallB] = false;
             next.visited = true;
-            stack.push(current);
-            removeWall(current, next);
+            stack.push(next);
             current = next;
-        } else if (stack.length > 0) {
+        } else {
             current = stack.pop();
         }
-    } while (stack.length > 0);
+    }
 }
 
 const grid = createGrid(gridWidth, gridHeight);
 generateMaze(grid);
 
-// Simple maze rendering
+// Draw the maze on the canvas
 function drawMaze(grid) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = 'black';
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = 2;
+
     for (let y = 0; y < gridHeight; y++) {
         for (let x = 0; x < gridWidth; x++) {
             const cell = grid[y][x];
             const x1 = x * cellSize;
             const y1 = y * cellSize;
+
+            // Draw walls
             if (cell.walls.top) ctx.strokeRect(x1, y1, cellSize, 1);
             if (cell.walls.right) ctx.strokeRect(x1 + cellSize, y1, 1, cellSize);
             if (cell.walls.bottom) ctx.strokeRect(x1, y1 + cellSize, cellSize, 1);
@@ -104,29 +91,3 @@ function drawMaze(grid) {
 }
 
 drawMaze(grid);
-
-// ... (rest of the code)
-
-// Use this to log the grid to the console for debugging
-function logGrid(grid) {
-    grid.forEach(row => {
-        let rowStr = row.map(cell => cell.visited ? ' ' : 'X').join('');
-        console.log(rowStr);
-    });
-}
-
-// Call this at the end of generateMaze to print the grid
-logGrid(grid);
-
-// ... (rest of the maze generation code)
-
-// After the maze is generated, but before it is drawn
-console.log('Maze generated: ');
-logGrid(grid);
-
-// Draw the maze and call this after to check rendering
-drawMaze(grid);
-console.log('Maze drawn.');
-
-// ... (rest of the drawing code)
-
