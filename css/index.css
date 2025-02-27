@@ -7,7 +7,7 @@ body, html {
 
 #landing {
   height: 100vh;
-  background: linear-gradient(to bottom, #000000 95%, #343a40 100%); /* Gradient fade effect */
+  background: linear-gradient(to bottom, #000000 95%, #343a40 100%);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,7 +17,7 @@ body, html {
 #landing h1 {
   font-size: 10em;
   font-weight: bold;
-  color: white; /* Adjusted for better visibility against the gradient */
+  color: white;
   text-shadow:
     1px 1px 0 #999,
     2px 2px 0 #888,
@@ -37,7 +37,7 @@ body, html {
 }
 
 #about {
-  background: linear-gradient(to top, #333333 0%, lightgrey 30%); /* Gradient fade from dark to light grey */
+  background: linear-gradient(to top, #333333 0%, lightgrey 30%);
 }
 
 #talent {
@@ -88,48 +88,48 @@ body, html {
 }
 
 .top-nav {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: transparent;
-    width: 100%;
-    padding: 10px 20px;
-    box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: transparent;
+  width: 100%;
+  padding: 10px 20px;
+  box-sizing: border-box;
 }
 
 .top-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
 }
 
 .top-nav li {
-    margin-right: 20px; /* Space between menu items */
+  margin-right: 20px;
 }
 
 .top-nav a {
-    text-decoration: none;
-    color: white; /* Adjust color as needed */
-    font-size: 16px; /* Adjust font size as needed */
-    text-transform: uppercase; /* Optional styling */
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  text-transform: uppercase;
 }
 
 .top-nav a:hover {
-    color: #CCCCCC; /* Color change on hover */
+  color: #CCCCCC;
 }
 
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place even on scroll */
-  z-index: 1; /* Sit on top of other content */
+  display: none;
+  position: fixed;
+  z-index: 1;
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Manage overflow */
-  background-color: rgba(0,0,0,0.4); /* Black with opacity for the overlay */
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
 }
 
 .modal-content {
@@ -137,24 +137,23 @@ body, html {
   color: black;
   padding: 20px;
   border: 1px solid #888;
-  width: 120%; /* Increase the width if necessary */
-  max-width: 800px; /* Set a maximum width */
-  min-height: 300px; /* Set a minimum height */
-  overflow-y: auto; /* Enable vertical scrolling */
+  width: 120%;
+  max-width: 800px;
+  min-height: 300px;
+  overflow-y: auto;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 1000; /* Ensure it's on top of other content */
+  z-index: 1000;
 }
 
-/* Make sure that the close button is visible and not cut off */
 .close {
   color: #aaa;
-  position: absolute; /* Position absolutely within the modal content */
-  top: 10px; /* Set top position */
-  right: 20px; /* Set right position */
+  position: absolute;
+  top: 10px;
+  right: 20px;
   font-size: 28px;
   font-weight: bold;
   cursor: pointer;
@@ -181,3 +180,35 @@ body, html {
   background-color: #45a049;
 }
 
+/* Maze Page Styling */
+#mazeCanvas {
+  display: block;
+  margin: 20px auto;
+  background-color: white;
+  border: 2px solid black;
+}
+
+#maze-container {
+  text-align: center;
+  padding: 20px;
+}
+
+#maze-controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+#maze-controls button {
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+}
+
+#maze-controls button:hover {
+  background-color: #45a049;
+}
