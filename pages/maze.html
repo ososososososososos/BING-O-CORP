@@ -7,7 +7,25 @@
     <link rel="stylesheet" href="../css/maze.css">
 </head>
 <body>
-    <canvas id="mazeCanvas" width="800" height="600"></canvas>
+
+    <!-- Navigation -->
+    <nav class="top-nav">
+        <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="menu.html">Menu</a></li>
+        </ul>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+        <h1>Generative Maze Game</h1>
+        <p>Use this tool to generate a unique maze each time. Click the button below to regenerate.</p>
+
+        <canvas id="mazeCanvas" width="800" height="600"></canvas>
+
+        <button id="generateMaze">Generate New Maze</button>
+    </div>
+
     <script src="../js/maze.js"></script>
 </body>
 </html>
